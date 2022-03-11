@@ -54,13 +54,132 @@ Server: Docker Engine - Community
 - Use : docker pull frrouting/frr
 
 ## Part 2: Discovering a VXLAN.
+setting up your first VXLAN (RFC 7348) network
+First in static then in dynamic multicast.
+
+- Config
+  - VLAN ID: 10
+  - Name: vxlan10
+  - setup bridge: br0
+  - Ethernet interfaces, as we like: (@IPs ) 
+
+host 1    30.1.1.1
+host 2    30.1.1.2
+
+- Test inspect traffic between two host in same our vlan
+
+### Files
+P2.gns3project
+
+touch _kzouggar-1_g
+touch _kzouggar-1_host
+touch _kzouggar-1_host_cmd
+touch _kzouggar-1_s
+touch _kzouggar-2_g
+touch _kzouggar-2_host
+touch _kzouggar-2_host_cmd
+touch _kzouggar-2_s
+
+
+
+### Config Static
+#### Routeur 1
+eth0 is the int connected to the switch
+eth1 is the int connected to the host
+
+- setup and up bridge int br0
+> ip link add br0 type bridge
+> ip link set device br0 up
+
+- Config @IP for eth0 int
+> ip addr add 10.1.1.1/24 device eth0
+> ip addr show eth0
+
+- Create VXLAN interface  
+> ip link add name vxlan10 type vxlan id 10 device eth0 remote 10.1.1.2 local 10.1.1.1 dstport 4789
+
+- Config @IP for vxlan10 int
+> ip addr add 20.1.1.1/24 dev vxlan10
+> ip link set dev vxlan10 up
+> ip -d link show vxlan10
+
+- Associate vxlan and eth network eth1 to be part of one bridge !!! so make eth1 part of br0
+bridge control add interface  
+> brctl addif br0 eth1
+> brctl addif br0 vxlan10
+
+
+
+##### #########
+ip link add br0 type bridge
+ip link set device br0 up
+ip addr add 10.1.1.1/24 device eth0
+ip link add name vxlan10 type vxlan id 10 device eth0 remote 10.1.1.2 local 10.1.1.1 dstport 4789
+ip addr add 20.1.1.1/24 dev vxlan10
+ip link set dev vxlan10 up
+brctl addif br0 vxlan10
+
+
+
+
+#### Routeur 2
+eth0 is the int connected to the switch
+eth1 is the int connected to the host
+
+- setup and up bridge int br0
+> ip link add br0 type bridge
+> ip link set device br0 up
+
+- Config @IP for eth0 int
+> ip addr add 10.1.1.2/24 device eth0
+> ip addr show eth0
+
+- Create VXLAN interface  
+> ip link add name vxlan10 type vxlan id 10 device eth0 remote 10.1.1.1 local 10.1.1.2 dstport 4789
+
+- Config @IP for vxlan10 int
+> ip addr add 20.1.1.2/24 dev vxlan10
+> ip link set dev vxlan10 up
+> ip -d link show vxlan10
+
+- Associate vxlan and eth network eth1 to be part of one bridge !!! so make eth1 part of br0
+bridge control add interface  
+> brctl addif br0 eth1
+> brctl addif br0 vxlan10
+
+
+##### #########
+ip link add br0 type bridge
+ip link set device br0 up
+ip addr add 10.1.1.2/24 device eth0
+ip link add name vxlan10 type vxlan id 10 device eth0 remote 10.1.1.1 local 10.1.1.2 dstport 4789
+ip addr add 20.1.1.2/24 dev vxlan10
+ip link set dev vxlan10 up
+brctl addif br0 vxlan10
+
+
+#### host 1
+- add @IP
+> ip addr add 30.1.1.1/24 dev eth1
+
+#### host 2
+- add @IP
+> ip addr add 30.1.1.2/24 dev eth1
+
+
+
+#### Switch
+
+
+
+
+
+
+
+
+
+
+
+
 ## Part 3: Discovering BGP with EVPN.
 
-
-bootstrap.min.css
-main.css
-font-awesome.min.css
-owl.carousel.min.css
-animate.min.css                 
-magnific-popup.css              
-owl.theme.default.min.css
