@@ -11,15 +11,3 @@ ip link set dev vxlan10 up
 ## Associate vxlan and eth network eth1 to be part of one bridge !!! so make eth1 part of br0 
 brctl addif br0 eth1
 brctl addif br0 vxlan10
-
-tail -f /dev/null
-
-
-
-
-
-
-
-
-
-
