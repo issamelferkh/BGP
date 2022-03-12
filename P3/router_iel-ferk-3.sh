@@ -1,31 +1,44 @@
 ip link add br0 type bridge
-ip link set dev bro up
+ip link set dev br0 up
 ip link add vxlan10 type vxlan id 10 dstport 4789
 ip link set dev vxlan10 up
 brctl addif br0 vxlan10
-brctl addif br0 eth1
+brctl addif br0 eth0
+touch /etc/frr/vtysh.conf
 
 
-hostname _iel-ferk-2
+vtysh << script
+configure terminal
+
 no ipv6 forwarding
+hostname R_iel-ferk-2
 !
-interface eth0
-  ip address 10.1.1.6/30
-  ip ospt area 0
+interface eth1
+ ip address 10.1.1.6/30
+ ip ospf area 0
+exit
 !
-int lo
-  ip add 1.1.1.6/32
-  ip ospf area 0
+interface lo
+ ip address 1.1.1.3/32
+ ip ospf area 0
+exit
 !
 router bgp 1
-  neighbor 1.1.1.1 remote-as 1
-  neighbor 1.1.1.1 update-source lo
-  !
-  address-family l2vpn evpn
-    neighbor 1.1.1.1 activate
-    advertise-all-vni
-  exit-address-family
+ neighbor 1.1.1.1 remote-as 1
+ neighbor 1.1.1.1 update-source lo
+ !
+ address-family l2vpn evpn
+  neighbor 1.1.1.1 activate
+  advertise-all-vni
+ exit-address-family
+exit
 !
 router ospf
+exit
+!
+script
+
+
+
 
 tail -f /dev/null

@@ -8,7 +8,7 @@ RUN apk update && \
 
 COPY _iel-ferk-1.sh /_iel-ferk-1.sh
 RUN chmod +x _iel-ferk-1.sh
-CMD ./_iel-ferk-1.sh
+#CMD ./_iel-ferk-1.sh
 
 # Host 2
 
@@ -20,7 +20,7 @@ RUN apk update && \
 
 COPY _iel-ferk-2.sh /_iel-ferk-2.sh
 RUN chmod +x _iel-ferk-2.sh
-CMD ./_iel-ferk-2.sh
+#CMD ./_iel-ferk-2.sh
 
 # Host 3
 
@@ -32,7 +32,7 @@ RUN apk update && \
 
 COPY _iel-ferk-3.sh /_iel-ferk-3.sh
 RUN chmod +x _iel-ferk-3.sh
-CMD ./_iel-ferk-3.sh
+#CMD ./_iel-ferk-3.sh
 
 
 ############################ Routers Part #################################
@@ -47,7 +47,7 @@ RUN apk update && \
 
 COPY router_iel-ferk-1.sh /router_iel-ferk-1.sh
 RUN chmod +x router_iel-ferk-1.sh
-CMD ./router_iel-ferk-1.sh
+#CMD ./router_iel-ferk-1.sh
 
 # Router 2
 
@@ -59,7 +59,7 @@ RUN apk update && \
 
 COPY router_iel-ferk-2.sh /router_iel-ferk-2.sh
 RUN chmod +x router_iel-ferk-2.sh
-CMD ./router_iel-ferk-2.sh
+#CMD ./router_iel-ferk-2.sh
 
 # Router 3
 
@@ -71,7 +71,7 @@ RUN apk update && \
 
 COPY router_iel-ferk-3.sh /router_iel-ferk-3.sh
 RUN chmod +x router_iel-ferk-3.sh
-CMD ./router_iel-ferk-3.sh
+#CMD ./router_iel-ferk-3.sh
 
 
 # Router 4
@@ -84,7 +84,7 @@ RUN apk update && \
 
 COPY router_iel-ferk-4.sh /router_iel-ferk-4.sh
 RUN chmod +x router_iel-ferk-4.sh
-CMD ./router_iel-ferk-4.sh
+#CMD ./router_iel-ferk-4.sh
 
 
 
