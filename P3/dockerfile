@@ -1,49 +1,109 @@
-# Host 
+# Host 1
 
-
-FROM alpine:3.15.0 AS host
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
-COPY host_ipconf.sh /host_ipconf.sh
-
->
-
-
-,,,
-# Set IP address to Ethernet interface
-ip addr add 30.1.1.$(echo $HOSTNAME | sed 's|.*-||')/24 dev eth1
-
-tail -f /dev/null
-,,,
-
-
-
-
-
-
-
-# Router
-
-FROM frrouting/frr:v8.1.0 AS router
+FROM alpine:3.15.0 AS host_iel-ferk-1
 
 RUN apk update && \
     apk upgrade && \
     apk add busybox
 
-COPY vtysh.conf /etc/frr/vtysh.conf
-COPY daemons /etc/frr/daemons
+COPY _iel-ferk-1.sh /_iel-ferk-1.sh
+RUN chmod +x _iel-ferk-1.sh
+CMD ./_iel-ferk-1.sh
 
-COPY start.sh /start.sh
+# Host 2
 
-# P2
-COPY static_ipconf.sh /static_ipconf.sh
-COPY multicast_ipconf.sh /multicast_ipconf.sh
+FROM alpine:3.15.0 AS host_iel-ferk-2
 
-# P3
-COPY spine_router.sh /spine_router.sh
-COPY leaf_router.sh /leaf_router.sh
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
 
-CMD ./start.sh
+COPY _iel-ferk-2.sh /_iel-ferk-2.sh
+RUN chmod +x _iel-ferk-2.sh
+CMD ./_iel-ferk-2.sh
+
+# Host 3
+
+FROM alpine:3.15.0 AS host_iel-ferk-3
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY _iel-ferk-3.sh /_iel-ferk-3.sh
+RUN chmod +x _iel-ferk-3.sh
+CMD ./_iel-ferk-3.sh
+
+
+############################ Routers Part #################################
+
+# Router 1
+
+FROM frrouting/frr AS routeur_iel-ferk-1
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY router_iel-ferk-1.sh /router_iel-ferk-1.sh
+RUN chmod +x router_iel-ferk-1.sh
+CMD ./router_iel-ferk-1.sh
+
+# Router 2
+
+FROM frrouting/frr AS routeur_iel-ferk-2
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY router_iel-ferk-2.sh /router_iel-ferk-2.sh
+RUN chmod +x router_iel-ferk-2.sh
+CMD ./router_iel-ferk-2.sh
+
+# Router 3
+
+FROM frrouting/frr AS routeur_iel-ferk-3
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY router_iel-ferk-3.sh /router_iel-ferk-3.sh
+RUN chmod +x router_iel-ferk-3.sh
+CMD ./router_iel-ferk-3.sh
+
+
+# Router 4
+
+FROM frrouting/frr AS routeur_iel-ferk-4
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY router_iel-ferk-4.sh /router_iel-ferk-4.sh
+RUN chmod +x router_iel-ferk-4.sh
+CMD ./router_iel-ferk-4.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

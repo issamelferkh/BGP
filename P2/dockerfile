@@ -9,6 +9,10 @@ CMD ./_kzouggar-1.sh
 # Host 2
 FROM alpine:latest AS host_kzouggar-2
 
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
 COPY _kzouggar-2.sh /_kzouggar-2.sh
 RUN chmod +x /_kzouggar-2.sh
 CMD ./_kzouggar-2.sh
@@ -17,6 +21,10 @@ CMD ./_kzouggar-2.sh
  # Routeur 1 Static Configure
 FROM frrouting/frr AS routeur_kzouggar-1
 
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+ 
 COPY _kzouggar-1_s.sh /_kzouggar-1_s.sh
 COPY _kzouggar-1_g.sh /_kzouggar-1_g.sh
 RUN chmod +x /_kzouggar-1_s.sh /_kzouggar-1_g.sh
@@ -24,6 +32,10 @@ CMD ./_kzouggar-1_s.sh
 
  # Routeur 2 Static Configure
 FROM frrouting/frr AS routeur_kzouggar-2
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
 
 COPY _kzouggar-2_s.sh /_kzouggar-2_s.sh
 COPY _kzouggar-2_g.sh /_kzouggar-2_g.sh
