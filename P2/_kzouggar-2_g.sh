@@ -1,9 +1,5 @@
-## setup and up bridge int br0
-ip link add br0 type bridge
-ip link set dev br0 up
-
-## Config @IP for eth0 interface
-ip addr add 10.1.1.2/24 dev eth0
+## Delete the older vxlan10
+ip link delete vxlan10
 
 ## Create VXLAN interface 
 ip link add name vxlan10 type vxlan id 10 dev eth0 group 239.1.1.1 dstport 4789
