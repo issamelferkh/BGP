@@ -117,6 +117,7 @@ ip addr add 10.1.1.1/24 device eth0
 ip link add name vxlan10 type vxlan id 10 device eth0 remote 10.1.1.2 local 10.1.1.1 dstport 4789
 ip addr add 20.1.1.1/24 dev vxlan10
 ip link set dev vxlan10 up
+brctl addif br0 eth1
 brctl addif br0 vxlan10
 
 
