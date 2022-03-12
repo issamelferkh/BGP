@@ -7,11 +7,11 @@ brctl addif br0 eth1
 touch /etc/frr/vtysh.conf
 
 
-vtysh <<end
+vtysh << script
 configure terminal
 
 no ipv6 forwarding
-hostname R_iel-ferk-2
+hostname routeur_iel-ferk-2
 !
 interface eth0
  ip address 10.1.1.2/30
@@ -36,9 +36,4 @@ exit
 router ospf
 exit
 !
-end
-
-
-
-
-tail -f /dev/null
+script

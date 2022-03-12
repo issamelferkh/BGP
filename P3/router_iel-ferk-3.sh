@@ -11,7 +11,7 @@ vtysh << script
 configure terminal
 
 no ipv6 forwarding
-hostname R_iel-ferk-2
+hostname routeur_iel-ferk-3
 !
 interface eth1
  ip address 10.1.1.6/30
@@ -37,8 +37,3 @@ router ospf
 exit
 !
 script
-
-
-
-
-tail -f /dev/null

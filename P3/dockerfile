@@ -1,109 +1,32 @@
 # Host 1
-
-FROM alpine:3.15.0 AS host_iel-ferk-1
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
-COPY _iel-ferk-1.sh /_iel-ferk-1.sh
-RUN chmod +x _iel-ferk-1.sh
-#CMD ./_iel-ferk-1.sh
+FROM issamelferkh/host_iel-ferk:latest AS host_iel-ferk-1
 
 # Host 2
-
-FROM alpine:3.15.0 AS host_iel-ferk-2
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
-COPY _iel-ferk-2.sh /_iel-ferk-2.sh
-RUN chmod +x _iel-ferk-2.sh
-#CMD ./_iel-ferk-2.sh
+FROM issamelferkh/host_iel-ferk:latest AS host_iel-ferk-2
 
 # Host 3
-
-FROM alpine:3.15.0 AS host_iel-ferk-3
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
-COPY _iel-ferk-3.sh /_iel-ferk-3.sh
-RUN chmod +x _iel-ferk-3.sh
-#CMD ./_iel-ferk-3.sh
-
-
-############################ Routers Part #################################
+FROM issamelferkh/host_iel-ferk:latest AS host_iel-ferk-3
 
 # Router 1
-
-FROM frrouting/frr AS routeur_iel-ferk-1
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
+FROM issamelferkh/routeur_iel-ferk:latest AS routeur_iel-ferk-1
 COPY router_iel-ferk-1.sh /router_iel-ferk-1.sh
 RUN chmod +x router_iel-ferk-1.sh
 #CMD ./router_iel-ferk-1.sh
 
 # Router 2
-
-FROM frrouting/frr AS routeur_iel-ferk-2
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
+FROM issamelferkh/routeur_iel-ferk:latest AS routeur_iel-ferk-2
 COPY router_iel-ferk-2.sh /router_iel-ferk-2.sh
 RUN chmod +x router_iel-ferk-2.sh
 #CMD ./router_iel-ferk-2.sh
 
 # Router 3
-
-FROM frrouting/frr AS routeur_iel-ferk-3
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
+FROM issamelferkh/routeur_iel-ferk:latest AS routeur_iel-ferk-3
 COPY router_iel-ferk-3.sh /router_iel-ferk-3.sh
 RUN chmod +x router_iel-ferk-3.sh
 #CMD ./router_iel-ferk-3.sh
 
-
 # Router 4
-
-FROM frrouting/frr AS routeur_iel-ferk-4
-
-RUN apk update && \
-    apk upgrade && \
-    apk add busybox
-
+FROM issamelferkh/routeur_iel-ferk:latest AS routeur_iel-ferk-4
 COPY router_iel-ferk-4.sh /router_iel-ferk-4.sh
 RUN chmod +x router_iel-ferk-4.sh
 #CMD ./router_iel-ferk-4.sh
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
