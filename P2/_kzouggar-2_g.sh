@@ -1,12 +1,12 @@
 ## setup and up bridge int br0
 ip link add br0 type bridge
-ip link set device br0 up
+ip link set dev br0 up
 
 ## Config @IP for eth0 interface
-ip addr add 10.1.1.2/24 device eth0
+ip addr add 10.1.1.2/24 dev eth0
 
 ## Create VXLAN interface 
-ip link add name vxlan10 type vxlan id 10 device eth0 group 239.1.1.1 dstport 4789
+ip link add name vxlan10 type vxlan id 10 dev eth0 group 239.1.1.1 dstport 4789
 
 ## Config @IP for vxlan10 interface
 ip addr add 20.1.1.2/24 dev vxlan10
