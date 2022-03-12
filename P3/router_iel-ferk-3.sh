@@ -6,7 +6,6 @@ brctl addif br0 vxlan10
 brctl addif br0 eth0
 touch /etc/frr/vtysh.conf
 
-
 vtysh << script
 configure terminal
 
