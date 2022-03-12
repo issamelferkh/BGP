@@ -1,0 +1,9 @@
+FROM alpine:3.15.0 AS host_kzouggar-1
+
+RUN apk update && \
+    apk upgrade && \
+    apk add busybox
+
+COPY _kzouggar-1.sh /_kzouggar-1.sh
+
+CMD ./_kzouggar-1.sh
