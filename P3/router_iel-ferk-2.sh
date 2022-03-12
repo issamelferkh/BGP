@@ -37,3 +37,5 @@ router ospf
 exit
 !
 script
+
+tail -f /dev/null

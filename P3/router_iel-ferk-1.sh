@@ -38,3 +38,5 @@ router ospf
 line vty
 !
 script
+
+tail -f /dev/null

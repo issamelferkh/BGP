@@ -18,6 +18,4 @@ ip link set dev vxlan10 up
 brctl addif br0 eth1
 brctl addif br0 vxlan10
 
-
-
 tail -f /dev/null

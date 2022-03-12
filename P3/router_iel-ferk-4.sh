@@ -37,3 +37,5 @@ router ospf
 exit
 !
 end
+
+tail -f /dev/null
