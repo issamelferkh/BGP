@@ -1,3 +1,5 @@
+/usr/lib/frr/frrinit.sh start
+
 vtysh << script
 
 configure terminal
